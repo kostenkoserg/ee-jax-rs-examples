@@ -1,0 +1,21 @@
+apply plugin: 'java' 
+apply plugin: 'war'
+
+sourceCompatibility = '1.8'
+defaultTasks 'clean', 'build'
+ext.libraryVersions = [
+    javaee                  : '8.0',
+    wildfly                 : '16.0.0.Final',
+    junit                   : '4.12'
+]
+configurations {
+    wildfly
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    wildfly "org.wildfly:wildfly-dist:${libraryVersions.wildfly}@zip"
+    providedCompile "javax:javaee-api:${libraryVersions.javaee}"
+    testCompile "junit:junit:${libraryVersions.junit}"
+}
